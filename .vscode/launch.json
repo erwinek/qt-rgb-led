@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug qt-rgb-led",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/qt-rgb-led",
+      "args": ["-platform", "offscreen"],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build",
+      "environment": [],
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
+}
