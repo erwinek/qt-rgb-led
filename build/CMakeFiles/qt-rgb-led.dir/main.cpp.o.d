@@ -138,55 +138,12 @@ CMakeFiles/qt-rgb-led.dir/main.cpp.o: /home/erwinek/qt-rgb-led/main.cpp \
  /usr/include/c++/12/bits/stl_multimap.h \
  /usr/include/c++/12/bits/erase_if.h \
  /home/erwinek/rpi-rgb-led-matrix/include/graphics.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/QImage \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qimage.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qtguiglobal.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qglobal.h \
- /usr/include/c++/12/cstddef /usr/include/c++/12/utility \
- /usr/include/c++/12/bits/stl_relops.h /usr/include/assert.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qconfig.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qtcore-config.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qsystemdetection.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qprocessordetection.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qcompilerdetection.h \
- /usr/include/c++/12/algorithm /usr/include/c++/12/bits/stl_algo.h \
- /usr/include/c++/12/bits/algorithmfwd.h \
- /usr/include/c++/12/bits/stl_heap.h \
- /usr/include/c++/12/bits/stl_tempbuf.h \
- /usr/include/c++/12/bits/uniform_int_dist.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qtypeinfo.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qsysinfo.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qlogging.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qflags.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qatomic.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qbasicatomic.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qatomic_cxx11.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qgenericatomic.h \
- /usr/include/c++/12/atomic /usr/include/c++/12/bits/atomic_base.h \
- /usr/include/c++/12/bits/atomic_lockfree_defines.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qglobalstatic.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qnumeric.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qversiontagging.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qtgui-config.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qcolor.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qrgb.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qnamespace.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringlist.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qlist.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qalgorithms.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qiterator.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qrefcount.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qarraydata.h \
- /usr/include/string.h /usr/include/strings.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qhashfunctions.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstring.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qchar.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qbytearray.h \
- /usr/include/c++/12/stdlib.h /usr/include/c++/12/iterator \
- /usr/include/c++/12/bits/stream_iterator.h \
- /usr/include/c++/12/bits/streambuf_iterator.h \
- /usr/include/c++/12/streambuf /usr/include/c++/12/bits/ios_base.h \
- /usr/include/c++/12/ext/atomicity.h \
+ /usr/include/c++/12/iostream /usr/include/c++/12/ostream \
+ /usr/include/c++/12/ios /usr/include/c++/12/exception \
+ /usr/include/c++/12/bits/exception_ptr.h \
+ /usr/include/c++/12/bits/cxxabi_init_exception.h \
+ /usr/include/c++/12/typeinfo /usr/include/c++/12/bits/nested_exception.h \
+ /usr/include/c++/12/bits/ios_base.h /usr/include/c++/12/ext/atomicity.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/gthr.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/gthr-default.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/atomic_word.h \
@@ -195,95 +152,18 @@ CMakeFiles/qt-rgb-led.dir/main.cpp.o: /home/erwinek/qt-rgb-led/main.cpp \
  /usr/include/c++/12/bits/locale_classes.tcc \
  /usr/include/c++/12/system_error \
  /usr/include/aarch64-linux-gnu/c++/12/bits/error_constants.h \
- /usr/include/c++/12/stdexcept /usr/include/c++/12/exception \
- /usr/include/c++/12/bits/exception_ptr.h \
- /usr/include/c++/12/bits/cxxabi_init_exception.h \
- /usr/include/c++/12/typeinfo /usr/include/c++/12/bits/nested_exception.h \
+ /usr/include/c++/12/stdexcept /usr/include/c++/12/streambuf \
  /usr/include/c++/12/bits/streambuf.tcc \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringliteral.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringalgorithms.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringview.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qpair.h \
- /usr/include/c++/12/numeric /usr/include/c++/12/bits/stl_numeric.h \
- /usr/include/c++/12/bit /usr/include/c++/12/functional \
- /usr/include/c++/12/bits/std_function.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qvector.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qcontainertools_impl.h \
- /usr/include/c++/12/list /usr/include/c++/12/bits/stl_list.h \
- /usr/include/c++/12/bits/allocated_ptr.h \
- /usr/include/c++/12/bits/list.tcc \
- /usr/lib/gcc/aarch64-linux-gnu/12/include/limits.h \
- /usr/lib/gcc/aarch64-linux-gnu/12/include/syslimits.h \
- /usr/include/limits.h /usr/include/aarch64-linux-gnu/bits/posix1_lim.h \
- /usr/include/aarch64-linux-gnu/bits/local_lim.h \
- /usr/include/linux/limits.h \
- /usr/include/aarch64-linux-gnu/bits/posix2_lim.h \
- /usr/include/aarch64-linux-gnu/bits/xopen_lim.h \
- /usr/include/aarch64-linux-gnu/bits/uio_lim.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qbytearraylist.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qregexp.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringmatcher.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qrgba64.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qpaintdevice.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qwindowdefs.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qobjectdefs.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qobjectdefs_impl.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qrect.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qmargins.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qsize.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qpoint.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qpixelformat.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qtransform.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qmatrix.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qpolygon.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qregion.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qdatastream.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qscopedpointer.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qiodevice.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qobject.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qmetatype.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qvarlengtharray.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qcontainerfwd.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qobject_impl.h \
- /usr/include/c++/12/chrono /usr/include/c++/12/bits/chrono.h \
- /usr/include/c++/12/ratio /usr/include/c++/12/limits \
- /usr/include/c++/12/ctime /usr/include/c++/12/bits/parse_numbers.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qline.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/QPainter \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qpainter.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qpixmap.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qsharedpointer.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qshareddata.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qhash.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h \
- /usr/include/c++/12/memory \
- /usr/include/c++/12/bits/stl_raw_storage_iter.h \
- /usr/include/c++/12/bits/align.h /usr/include/c++/12/bits/unique_ptr.h \
- /usr/include/c++/12/bits/shared_ptr.h \
- /usr/include/c++/12/bits/shared_ptr_base.h \
- /usr/include/c++/12/ext/concurrence.h \
- /usr/include/c++/12/bits/shared_ptr_atomic.h \
- /usr/include/c++/12/backward/auto_ptr.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qimage.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qtextoption.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qpen.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qbrush.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qfontinfo.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qfont.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qfontmetrics.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/QColor \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qcolor.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/QFont \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qfont.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/QTime \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qdatetime.h \
- /usr/include/unistd.h /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
- /usr/include/aarch64-linux-gnu/bits/environments.h \
- /usr/include/aarch64-linux-gnu/bits/confname.h \
- /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
- /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
- /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/signal.h \
+ /usr/include/c++/12/bits/basic_ios.h \
+ /usr/include/c++/12/bits/locale_facets.h /usr/include/c++/12/cwctype \
+ /usr/include/wctype.h /usr/include/aarch64-linux-gnu/bits/wctype-wchar.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_base.h \
+ /usr/include/c++/12/bits/streambuf_iterator.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_inline.h \
+ /usr/include/c++/12/bits/locale_facets.tcc \
+ /usr/include/c++/12/bits/basic_ios.tcc \
+ /usr/include/c++/12/bits/ostream.tcc /usr/include/c++/12/istream \
+ /usr/include/c++/12/bits/istream.tcc /usr/include/signal.h \
  /usr/include/aarch64-linux-gnu/bits/signum-generic.h \
  /usr/include/aarch64-linux-gnu/bits/signum-arch.h \
  /usr/include/aarch64-linux-gnu/bits/types/sig_atomic_t.h \
@@ -315,21 +195,21 @@ CMakeFiles/qt-rgb-led.dir/main.cpp.o: /home/erwinek/qt-rgb-led/main.cpp \
  /usr/include/aarch64-linux-gnu/bits/procfs-prregset.h \
  /usr/include/aarch64-linux-gnu/bits/procfs-extra.h \
  /usr/include/aarch64-linux-gnu/bits/sigstack.h \
- /usr/include/aarch64-linux-gnu/bits/sigstksz.h \
+ /usr/include/aarch64-linux-gnu/bits/sigstksz.h /usr/include/unistd.h \
+ /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
+ /usr/include/aarch64-linux-gnu/bits/environments.h \
+ /usr/include/aarch64-linux-gnu/bits/confname.h \
+ /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
+ /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h \
  /usr/include/aarch64-linux-gnu/bits/ss_flags.h \
  /usr/include/aarch64-linux-gnu/bits/types/struct_sigstack.h \
  /usr/include/aarch64-linux-gnu/bits/sigthread.h \
  /usr/include/aarch64-linux-gnu/bits/signal_ext.h \
- /usr/include/c++/12/iostream /usr/include/c++/12/ostream \
- /usr/include/c++/12/ios /usr/include/c++/12/bits/basic_ios.h \
- /usr/include/c++/12/bits/locale_facets.h /usr/include/c++/12/cwctype \
- /usr/include/wctype.h /usr/include/aarch64-linux-gnu/bits/wctype-wchar.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_base.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_inline.h \
- /usr/include/c++/12/bits/locale_facets.tcc \
- /usr/include/c++/12/bits/basic_ios.tcc \
- /usr/include/c++/12/bits/ostream.tcc /usr/include/c++/12/istream \
- /usr/include/c++/12/bits/istream.tcc \
- /home/erwinek/qt-rgb-led/LedTextDisplay.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/QString \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qstring.h
+ /usr/include/c++/12/thread /usr/include/c++/12/bits/std_thread.h \
+ /usr/include/c++/12/bits/unique_ptr.h \
+ /usr/include/c++/12/bits/this_thread_sleep.h \
+ /usr/include/c++/12/bits/chrono.h /usr/include/c++/12/ratio \
+ /usr/include/c++/12/limits /usr/include/c++/12/ctime \
+ /usr/include/c++/12/bits/parse_numbers.h /usr/include/c++/12/chrono
