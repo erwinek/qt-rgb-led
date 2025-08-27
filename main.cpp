@@ -22,6 +22,8 @@ static void InterruptHandler(int signo) {
 }
 
 int main(int argc, char *argv[]) {
+    QGuiApplication app(argc, argv);
+    
     RGBMatrix::Options matrix_options;
     RuntimeOptions runtime_opt;
 
