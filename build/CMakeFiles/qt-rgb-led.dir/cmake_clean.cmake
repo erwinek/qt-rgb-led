@@ -1,11 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/qt-rgb-led_autogen.dir/AutogenUsed.txt"
-  "CMakeFiles/qt-rgb-led_autogen.dir/ParseCache.txt"
-  "qt-rgb-led_autogen"
   "CMakeFiles/qt-rgb-led.dir/main.cpp.o"
-  "CMakeFiles/qt-rgb-led.dir/main.cpp.o.d"
-  "CMakeFiles/qt-rgb-led.dir/qt-rgb-led_autogen/mocs_compilation.cpp.o"
-  "CMakeFiles/qt-rgb-led.dir/qt-rgb-led_autogen/mocs_compilation.cpp.o.d"
   "qt-rgb-led"
   "qt-rgb-led.pdb"
 )

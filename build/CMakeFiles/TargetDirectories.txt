@@ -1,4 +1,3 @@
-/home/erwinek/qt-rgb-led/build/CMakeFiles/qt-rgb-led.dir
-/home/erwinek/qt-rgb-led/build/CMakeFiles/edit_cache.dir
 /home/erwinek/qt-rgb-led/build/CMakeFiles/rebuild_cache.dir
-/home/erwinek/qt-rgb-led/build/CMakeFiles/qt-rgb-led_autogen.dir
+/home/erwinek/qt-rgb-led/build/CMakeFiles/edit_cache.dir
+/home/erwinek/qt-rgb-led/build/CMakeFiles/qt-rgb-led.dir

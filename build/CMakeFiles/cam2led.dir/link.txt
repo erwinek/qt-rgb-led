@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/cam2led.dir/main.cpp.o -o cam2led   -L/home/erwinek/rpi-rgb-led-matrix/lib  -Wl,-rpath,/home/erwinek/rpi-rgb-led-matrix/lib -lrgbmatrix -lpthread 
