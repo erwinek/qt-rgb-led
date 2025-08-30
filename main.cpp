@@ -14,10 +14,8 @@ static void InterruptHandler(int signo) {
 
 class LedTextDisplay {
 public:
-    LedTextDisplay(int width, int height)
-        : width_(width), height_(height),
-          score_(888), high_score_(600), credits_(99),
-          scroll_text_("Boxer ProGames") {}
+    LedTextDisplay()
+        : score_(888), high_score_(600), credits_(99), scroll_text_("Boxer ProGames") {}
 
     void setScore(int score) { score_ = score; }
     void setHighScore(int high_score) { high_score_ = high_score; }
@@ -25,31 +23,29 @@ public:
     void setScrollText(const std::string& text) { scroll_text_ = text; }
 
     void render(FrameCanvas* canvas, Font& font) {
-        Color color1(255, 0, 0);     // czerwony
-        Color color2(0, 255, 0);     // zielony
-        Color color3(0, 0, 255);     // niebieski
-        Color color4(255, 255, 0);   // żółty
+        Color color1(255, 0, 0);    // czerwony
+        Color color2(0, 255, 0);    // zielony
+        Color color3(0, 0, 255);    // niebieski
+        Color color4(255, 255, 0);  // żółty
 
-        // Wiersz 1: Wynik
-        DrawText(canvas, font, 1, 30, color1, std::to_string(score_).c_str());
+        // Czyszczenie całego ekranu
+        canvas->Clear();
 
-        // Wiersz 2: Rekord
-        DrawText(canvas, font, 1, 60, color2, std::to_string(high_score_).c_str());
+        // Statyczne linie
+        DrawText(canvas, font, 192/3, 40, color1, std::to_string(score_).c_str());
+        DrawText(canvas, font, 192/3, 84, color2, std::to_string(high_score_).c_str());
+        DrawText(canvas, font, 192/3, 128, color3, std::to_string(credits_).c_str());
 
-        // Wiersz 3: Kredyty
-        DrawText(canvas, font, 1, 90, color3, std::to_string(credits_).c_str());
+        // Przewijający się tekst
+        static int scroll_pos = canvas->width();
+        int text_width = font.CharacterWidth('0') * scroll_text_.size(); // przybliżona szerokość
+        scroll_pos -= 1;
+        if (scroll_pos < -text_width) scroll_pos = canvas->width();
+        DrawText(canvas, font, scroll_pos, 170, color4, scroll_text_.c_str());
 
-        // Wiersz 4: Przewijany tekst
-        static int scroll_pos = width_;
-        DrawText(canvas, font, scroll_pos, 150, color4, scroll_text_.c_str());
-        scroll_pos--;
-        if (scroll_pos < -int(scroll_text_.length() * font.CharacterWidth('A'))) // przybliżona szerokość
-            scroll_pos = width_;
     }
 
 private:
-    int width_;
-    int height_;
     int score_;
     int high_score_;
     int credits_;
@@ -60,36 +56,37 @@ int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     RuntimeOptions runtime_opt;
 
-    // ustawienia matrycy 192x192 (3x3 64x64)
     matrix_options.rows = 64;
     matrix_options.cols = 64;
-    matrix_options.chain_length = 3;
-    matrix_options.parallel = 3;
+    matrix_options.chain_length = 3; // 64*3 = 192 px
+    matrix_options.parallel = 3;     // 64*3 = 192 px
     matrix_options.hardware_mapping = "regular";
     runtime_opt.gpio_slowdown = 3;
 
-    RGBMatrix *matrix = RGBMatrix::CreateFromOptions(matrix_options, runtime_opt);
-    if (matrix == nullptr)
-        return 1;
+    RGBMatrix* matrix = RGBMatrix::CreateFromOptions(matrix_options, runtime_opt);
+    if (!matrix) return 1;
 
     signal(SIGTERM, InterruptHandler);
     signal(SIGINT, InterruptHandler);
 
-    FrameCanvas *canvas = matrix->CreateFrameCanvas();
+    FrameCanvas* canvas = matrix->CreateFrameCanvas();
 
     Font font;
-    if (!font.LoadFont("fonts/5x8.bdf")) {
-        fprintf(stderr, "Nie można wczytać fontu\n");
+    if (!font.LoadFont("./fonts/ComicNeue-Bold-48.bdf")) {  // upewnij się, że font jest w katalogu fonts
+        printf("Nie można wczytać fontu\n");
         return 1;
     }
 
-    LedTextDisplay display(matrix->width(), matrix->height());
+    LedTextDisplay display;
+	static int i = 0;
 
     while (!interrupt_received) {
-        canvas->Clear();
         display.render(canvas, font);
         canvas = matrix->SwapOnVSync(canvas);
         usleep(30 * 1000); // ~33 FPS
+	if (i<999) i++;
+	else i=0;
+	display.setScore(i++);
     }
 
     matrix->Clear();
