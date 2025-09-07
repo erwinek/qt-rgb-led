@@ -16,7 +16,7 @@ static void InterruptHandler(int signo) {
 class LedTextDisplay {
 public:
     LedTextDisplay()
-        : score_(888), high_score_(600), credits_(66), scroll_text_("Boxer ProGames") {}
+        : score_(888), high_score_(600), credits_(0), scroll_text_("Boxer ProGames") {}
 
     void setScore(int score) { score_ = score; }
     void setHighScore(int high_score) { high_score_ = high_score; }
@@ -81,8 +81,8 @@ int main(int argc, char *argv[]) {
     LedTextDisplay display;
 	static int i = 0;
 
-SerialReader serial("/dev/ttyUSB0", B115200);
-serial.setCommandHandler([&](const std::string& cmd) {
+	SerialReader serial("/dev/ttyUSB0", B1000000);
+	serial.setCommandHandler([&](const std::string& cmd) {
     if (cmd.rfind("SCORE", 0) == 0) {
         int val = std::stoi(cmd.substr(6));
         display.setScore(val);
@@ -105,7 +105,7 @@ serial.start();
         usleep(30 * 1000); // ~33 FPS
 	if (i<999) i++;
 	else i=0;
-	display.setScore(i++);
+	//display.setScore(i++);
     }
 
     matrix->Clear();
