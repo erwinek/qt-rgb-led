@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <string>
+#include "SerialReader.h"
 
 using namespace rgb_matrix;
 
@@ -15,7 +16,7 @@ static void InterruptHandler(int signo) {
 class LedTextDisplay {
 public:
     LedTextDisplay()
-        : score_(888), high_score_(600), credits_(99), scroll_text_("Boxer ProGames") {}
+        : score_(888), high_score_(600), credits_(66), scroll_text_("Boxer ProGames") {}
 
     void setScore(int score) { score_ = score; }
     void setHighScore(int high_score) { high_score_ = high_score; }
@@ -79,6 +80,24 @@ int main(int argc, char *argv[]) {
 
     LedTextDisplay display;
 	static int i = 0;
+
+SerialReader serial("/dev/ttyUSB0", B115200);
+serial.setCommandHandler([&](const std::string& cmd) {
+    if (cmd.rfind("SCORE", 0) == 0) {
+        int val = std::stoi(cmd.substr(6));
+        display.setScore(val);
+    } else if (cmd.rfind("HISCORE", 0) == 0) {
+        int val = std::stoi(cmd.substr(8));
+        display.setHighScore(val);
+    } else if (cmd.rfind("CREDITS", 0) == 0) {
+        int val = std::stoi(cmd.substr(8));
+        display.setCredits(val);
+    } else if (cmd.rfind("TEXT", 0) == 0) {
+        display.setScrollText(cmd.substr(5));
+    }
+});
+serial.start();
+
 
     while (!interrupt_received) {
         display.render(canvas, font);

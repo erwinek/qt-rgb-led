@@ -1,17 +1,26 @@
-cmake_minimum_required(VERSION 3.5)
-project(qt-rgb-led LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.10)
+project(qt-rgb-led CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Ścieżka do biblioteki rpi-rgb-led-matrix
-set(RGBMATRIX_DIR "$ENV{HOME}/rpi-rgb-led-matrix")
-include_directories(${RGBMATRIX_DIR}/include)
-link_directories(${RGBMATRIX_DIR}/lib)
+# Dodaj pliki źródłowe
+set(SOURCES
+    main.cpp
+    SerialReader.cpp
+)
 
-add_executable(qt-rgb-led main.cpp LedTextDisplay.h)
+set(HEADERS
+    SerialReader.h
+)
 
-target_link_libraries(qt-rgb-led
+# Główna biblioteka LED-matrix
+include_directories(/home/erwinek/rpi-rgb-led-matrix/include)
+link_directories(/home/erwinek/rpi-rgb-led-matrix/lib)
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
+target_link_libraries(${PROJECT_NAME}
     rgbmatrix
     pthread
 )
