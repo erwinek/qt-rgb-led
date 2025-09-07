@@ -19,7 +19,7 @@ void SerialReader::setCommandHandler(std::function<void(const std::string&)> han
 void SerialReader::start() {
     fd_ = open(device_.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
     if (fd_ < 0) {
-        perror("open");
+        perror("UART ERROR open");
         return;
     }
 
