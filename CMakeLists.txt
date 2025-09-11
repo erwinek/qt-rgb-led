@@ -9,6 +9,7 @@ set(SOURCES
     main.cpp
     SerialReader.cpp
     GifPlayer.cpp
+    external/gifdec.c
 )
 
 set(HEADERS
