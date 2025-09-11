@@ -4,8 +4,12 @@
 #include <signal.h>
 #include <string>
 #include "SerialReader.h"
+#include "GifPlayer.h"
 
 using namespace rgb_matrix;
+
+std::atomic<bool> play_gif(false);
+std::unique_ptr<GifPlayer> gif_player;
 
 volatile bool interrupt_received = false;
 
@@ -99,13 +103,24 @@ int main(int argc, char *argv[]) {
 serial.start();
 
 
+	std::string path = "anime/cube-14564_256.gif";
+        gif_player = std::make_unique<GifPlayer>(path);
+        play_gif = true;
+
     while (!interrupt_received) {
-        display.render(canvas, font);
+//        display.render(canvas, font);
+//        canvas = matrix->SwapOnVSync(canvas);
+
+
+        if (play_gif && gif_player) {
+            gif_player->render(canvas);
+        } else {
+            display.render(canvas, font);
+        }
         canvas = matrix->SwapOnVSync(canvas);
+
+
         usleep(30 * 1000); // ~33 FPS
-	if (i<999) i++;
-	else i=0;
-	//display.setScore(i++);
     }
 
     matrix->Clear();

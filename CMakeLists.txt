@@ -1,26 +1,35 @@
 cmake_minimum_required(VERSION 3.10)
-project(qt-rgb-led CXX)
+project(qt-rgb-led)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Dodaj pliki źródłowe
+# Źródła
 set(SOURCES
     main.cpp
     SerialReader.cpp
+    GifPlayer.cpp
 )
 
 set(HEADERS
     SerialReader.h
+    GifPlayer.h
 )
 
-# Główna biblioteka LED-matrix
-include_directories(/home/erwinek/rpi-rgb-led-matrix/include)
-link_directories(/home/erwinek/rpi-rgb-led-matrix/lib)
+# Tworzymy executable
+add_executable(qt-rgb-led ${SOURCES} ${HEADERS})
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+# Ścieżki do nagłówków
+target_include_directories(qt-rgb-led PRIVATE
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/external
+    /home/erwinek/rpi-rgb-led-matrix/include
+)
 
-target_link_libraries(${PROJECT_NAME}
-    rgbmatrix
+# Linkowanie biblioteki RGB LED Matrix
+target_link_libraries(qt-rgb-led
+    /home/erwinek/rpi-rgb-led-matrix/lib/librgbmatrix.a
     pthread
+    rt
+    m
 )
