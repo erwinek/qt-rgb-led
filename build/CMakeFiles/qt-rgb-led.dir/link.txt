@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/qt-rgb-led.dir/main.cpp.o -o qt-rgb-led   -L/home/erwinek/rpi-rgb-led-matrix/lib  -Wl,-rpath,/home/erwinek/rpi-rgb-led-matrix/lib -lrgbmatrix -lpthread 
