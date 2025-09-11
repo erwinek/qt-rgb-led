@@ -2,6 +2,7 @@
 #include "gifdec.h"
 #include <iostream>
 #include <unistd.h>
+#include <cstring>
 
 GifPlayer::GifPlayer(const std::string &path) : path_(path) {}
 
@@ -26,6 +27,7 @@ bool GifPlayer::load() {
 
     do {
         if (gd_get_frame(gif)) {
+            memset(frame, 0, gif->width * gif->height * 3); // wyzeruj bufor = czarne tło
             gd_render_frame(gif, frame);
 
             // zapisz RGB
@@ -63,13 +65,25 @@ void GifPlayer::render(rgb_matrix::FrameCanvas *canvas) {
     }
 
     const auto &frame = frames_[currentFrame_];
+
+    // policz offsety, żeby wyśrodkować
+    int canvas_w = canvas->width();
+    int canvas_h = canvas->height();
+    int offset_x = (canvas_w - width_) / 2;
+    int offset_y = (canvas_h - height_) / 2;
+
     int idx = 0;
     for (int y = 0; y < height_; ++y) {
         for (int x = 0; x < width_; ++x) {
             uint8_t r = frame[idx++];
             uint8_t g = frame[idx++];
             uint8_t b = frame[idx++];
-            canvas->SetPixel(x, y, r, g, b);
+            int draw_x = offset_x + x;
+            int draw_y = offset_y + y;
+            if (draw_x >= 0 && draw_x < canvas_w &&
+                draw_y >= 0 && draw_y < canvas_h) {
+                canvas->SetPixel(draw_x, draw_y, r, g, b);
+            }
         }
     }
 }
