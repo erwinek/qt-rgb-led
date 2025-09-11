@@ -105,7 +105,7 @@ serial.start();
 
 	std::string path = "anime/cube-14564_256.gif";
         gif_player = std::make_unique<GifPlayer>(path);
-	gif_player.load();
+	gif_player->load();
         play_gif = true;
 
     while (!interrupt_received) {
