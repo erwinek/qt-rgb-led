@@ -46,7 +46,8 @@ public:
         DrawText(canvas, small_font, 10, 72, color2, "RECORD:");
         DrawText(canvas, font, 192/3, 84, color2, std::to_string(high_score_).c_str());
         DrawText(canvas, small_font, 10, 115, color3, "CREDIT:");
-        DrawText(canvas, font, 192/3, 128, color3, std::to_string(credits_).c_str());
+	if(credits_==55) DrawText(canvas, small_font, 192/3, 115, color3, "FreePlay");
+        else DrawText(canvas, font, 192/3, 128, color3, std::to_string(credits_).c_str());
 
         // Przewijający się tekst
         static int scroll_pos = canvas->width();
@@ -112,10 +113,22 @@ int main(int argc, char *argv[]) {
         std::string path = "anime/" + cmd.substr(9) + ".gif";
         printf("\n path: %s\n", path.c_str());
 
-        path = "anime/cube-14564_256.gif";
-        gif_player = std::make_unique<GifPlayer>(path);
-	    gif_player->load();
-        play_gif = true;
+        //path = "anime/cube-14564_256.gif";
+        //gif_player = std::make_unique<GifPlayer>(path);
+	//gif_player->load();
+        //play_gif = true;
+
+	gif_player = std::make_unique<GifPlayer>(path);
+	if (!gif_player->load()) {
+    		fprintf(stderr, "Nie udało się załadować GIF: %s\n", path.c_str());
+    		gif_player.reset();
+    		play_gif = false;
+	}
+	else {
+//		play_gif = true;
+	}
+
+
     }
 });
 serial.start();
@@ -130,7 +143,7 @@ serial.start();
         canvas = matrix->SwapOnVSync(canvas);
 
 
-        usleep(30 * 1000); // ~33 FPS
+        usleep(40 * 1000); // ~33 FPS
     }
 
     matrix->Clear();
