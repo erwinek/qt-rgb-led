@@ -26,8 +26,12 @@ public:
             }
         }
 
-    void setScore(int score) { score_ = score; }
-    void setHighScore(int high_score) { high_score_ = high_score; }
+    void setScore(int score) { 
+	if (score < 1000 && score != 888) score_ = score; 
+    }
+    void setHighScore(int high_score) { 
+	if (high_score<1000 && high_score != 888) high_score_ = high_score;
+    }
     void setCredits(int credits) { credits_ = credits; }
     void setScrollText(const std::string& text) { scroll_text_ = text; }
 
