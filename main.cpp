@@ -20,7 +20,11 @@ static void InterruptHandler(int signo) {
 class LedTextDisplay {
 public:
     LedTextDisplay()
-        : score_(888), high_score_(600), credits_(0), scroll_text_("Boxer ProGames") {}
+        : score_(888), high_score_(600), credits_(0), scroll_text_("Boxer ProGames") {
+            if (!small_font.LoadFont("./fonts/7x13.bdf")) {
+            printf("Nie można wczytać small_font\n");
+            }
+        }
 
     void setScore(int score) { score_ = score; }
     void setHighScore(int high_score) { high_score_ = high_score; }
@@ -37,8 +41,11 @@ public:
         canvas->Clear();
 
         // Statyczne linie
+        DrawText(canvas, small_font, 10, 26, color1, "SCORE:");
         DrawText(canvas, font, 192/3, 40, color1, std::to_string(score_).c_str());
+        DrawText(canvas, small_font, 10, 72, color2, "RECORD:");
         DrawText(canvas, font, 192/3, 84, color2, std::to_string(high_score_).c_str());
+        DrawText(canvas, small_font, 10, 115, color3, "CREDIT:");
         DrawText(canvas, font, 192/3, 128, color3, std::to_string(credits_).c_str());
 
         // Przewijający się tekst
@@ -55,6 +62,7 @@ private:
     int high_score_;
     int credits_;
     std::string scroll_text_;
+    Font small_font;
 };
 
 int main(int argc, char *argv[]) {
@@ -98,20 +106,21 @@ int main(int argc, char *argv[]) {
         display.setCredits(val);
     } else if (cmd.rfind("TEXT", 0) == 0) {
         display.setScrollText(cmd.substr(5));
+    } else if (cmd.rfind("STOP_GIF", 0) == 0) {
+        play_gif = false;
+    } else if (cmd.rfind("PLAY_GIF", 0) == 0) {
+        std::string path = "anime/" + cmd.substr(9) + ".gif";
+        printf("\n path: %s\n", path.c_str());
+
+        path = "anime/cube-14564_256.gif";
+        gif_player = std::make_unique<GifPlayer>(path);
+	    gif_player->load();
+        play_gif = true;
     }
 });
 serial.start();
 
-
-	std::string path = "anime/fractal-22484_256.gif";
-        gif_player = std::make_unique<GifPlayer>(path);
-	gif_player->load();
-        play_gif = true;
-
     while (!interrupt_received) {
-//        display.render(canvas, font);
-//        canvas = matrix->SwapOnVSync(canvas);
-
 
         if (play_gif && gif_player) {
             gif_player->render(canvas);
