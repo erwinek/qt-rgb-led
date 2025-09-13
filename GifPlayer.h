@@ -8,6 +8,7 @@ public:
     GifPlayer();
     bool load(const std::string& new_filename = "");
     void render(rgb_matrix::FrameCanvas* canvas);
+    const std::string& getCurrentPath() const { return path_; }
 
 private:
     std::string path_;

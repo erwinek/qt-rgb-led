@@ -26,33 +26,64 @@ bool GifPlayer::load(const std::string& new_filename) {
             return false;
         }
 
-        width_ = gif->width;
-        height_ = gif->height;
+        int orig_width = gif->width;
+        int orig_height = gif->height;
+        
+        // Oblicz współczynnik skalowania zachowując proporcje
+        float scale_w = 192.0f / orig_width;
+        float scale_h = 192.0f / orig_height;
+        float scale = std::min(scale_w, scale_h);
+        
+        // Oblicz nowe wymiary
+        width_ = static_cast<int>(orig_width * scale);
+        height_ = static_cast<int>(orig_height * scale);
+        
+        // Oblicz offset do wycentrowania
+        int offset_x = (192 - width_) / 2;
+        int offset_y = (192 - height_) / 2;
 
         frames_.clear();
         delays_.clear();
 
-        uint8_t *frame = (uint8_t*)malloc(gif->width * gif->height * 3);
-        if (!frame) {
+        uint8_t *orig_frame = (uint8_t*)malloc(orig_width * orig_height * 3);
+        std::vector<uint8_t> scaled_frame(192 * 192 * 3, 0); // Czarne tło
+
+        if (!orig_frame) {
             gd_close_gif(gif);
             return false;
         }
 
         do {
-            if (gd_get_frame(gif)) {
-                memset(frame, 0, gif->width * gif->height * 3); // czarne tło
-                gd_render_frame(gif, frame);
-
-                // zapisz RGB
-                std::vector<uint8_t> rgb(frame, frame + (gif->width * gif->height * 3));
-                frames_.push_back(rgb);
-
-                // delay w ms (gce.delay = setki ms)
-                delays_.push_back(gif->gce.delay * 10);
+            if (gd_get_frame(gif) == 1) {
+                // Get frame data separately
+                gd_render_frame(gif, orig_frame);
+                
+                // Skaluj każdą klatkę
+                for (int y = 0; y < 192; y++) {
+                    for (int x = 0; x < 192; x++) {
+                        // Mapuj piksele ze skalowaniem
+                        int src_x = (x - offset_x) / scale;
+                        int src_y = (y - offset_y) / scale;
+                        
+                        if (src_x >= 0 && src_x < orig_width && 
+                            src_y >= 0 && src_y < orig_height) {
+                            // Kopiuj piksele z oryginalnej klatki
+                            int src_idx = (src_y * orig_width + src_x) * 3;
+                            int dst_idx = (y * 192 + x) * 3;
+                            
+                            scaled_frame[dst_idx] = orig_frame[src_idx];     // R
+                            scaled_frame[dst_idx + 1] = orig_frame[src_idx + 1]; // G
+                            scaled_frame[dst_idx + 2] = orig_frame[src_idx + 2]; // B
+                        }
+                    }
+                }
+                
+                frames_.push_back(scaled_frame);
+                delays_.push_back(gif->gce.delay * 10); // delay w ms
             }
         } while (gd_get_frame(gif) > 0);
 
-        free(frame);
+        free(orig_frame);
         gd_close_gif(gif);
 
         currentFrame_ = 0;

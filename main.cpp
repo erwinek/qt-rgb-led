@@ -188,6 +188,13 @@ serial.setCommandHandler([&](const std::string& cmd) {
         std::string name = cmd.substr(9);
         if (!name.empty()) {
             std::string path = "anime/" + name + ".gif";
+            
+            // Sprawdź czy ten sam GIF jest już załadowany
+            if (gif_player && gif_player->getCurrentPath() == path) {
+                play_gif = true;  // Tylko włącz wyświetlanie
+                return;
+            }
+
             std::cout << "Ładowanie GIF: " << path << std::endl;
             
             if (!gif_player) {
