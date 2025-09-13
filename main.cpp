@@ -23,7 +23,7 @@ static void InterruptHandler(int signo) {
 class LedTextDisplay {
 public:
     LedTextDisplay()
-        : score_(888), high_score_(600), credits_(0), scroll_text_(""), m_Text1("Press Start"), m_Text2("or use Hammer") {
+        : score_(888), high_score_(600), credits_(0), scroll_text_(""), m_Text1(""), m_Text2("") {
             if (!small_font.LoadFont("./fonts/7x13.bdf")) printf("Nie można wczytać small_font\n");
 	    if (!medium_font.LoadFont("./fonts/9x18B.bdf")) printf("Nie można wczytać medium_font\n");
         }
@@ -91,6 +91,10 @@ public:
         }
     }
 }
+
+    void setText1(const std::string& text) { m_Text1 = text; }
+    void setText2(const std::string& text) { m_Text2 = text; }
+
 
 private:
     int score_;
@@ -166,14 +170,17 @@ serial.setCommandHandler([&](const std::string& cmd) {
         std::string arg = cmd.substr(8);
         if (safe_stoi(arg, val)) display.setCredits(val);
 
-    } else if (cmd.rfind("TEXT", 0) == 0) {
-        std::string arg = cmd.substr(5);
-        if (!arg.empty()) {
-            display.setScrollText(arg);
-        } else {
-            std::cerr << "Błąd: brak tekstu po TEXT\n";
-        }
+    } else if (cmd.rfind("TEXT1", 0) == 0) {
+        std::string arg = cmd.substr(6);
+        display.setText1(arg);
 
+    } else if (cmd.rfind("TEXT2", 0) == 0) {
+        std::string arg = cmd.substr(6);
+        display.setText2(arg);
+
+    } else if (cmd.rfind("SCROLL", 0) == 0) {
+        std::string arg = cmd.substr(7);
+        display.setScrollText(arg);
     } else if (cmd.rfind("STOP_GIF", 0) == 0) {
         play_gif = false;
 
