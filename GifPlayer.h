@@ -1,23 +1,20 @@
 #pragma once
+#include "led-matrix.h"
 #include <string>
 #include <vector>
-#include <cstdint>
-#include <chrono>
-#include <led-matrix.h>
 
 class GifPlayer {
 public:
-    GifPlayer(const std::string &path);
-    bool load();  // ładuje klatki z pliku
-    void render(rgb_matrix::FrameCanvas *canvas);
+    GifPlayer();
+    bool load(const std::string& new_filename = "");
+    void render(rgb_matrix::FrameCanvas* canvas);
 
 private:
-    std::string path_;  // ścieżka do pliku
+    std::string path_;
     int width_ = 0;
     int height_ = 0;
-
-    std::vector<std::vector<uint8_t>> frames_;  // klatki RGB
-    std::vector<int> delays_;                   // opóźnienia w ms
-    size_t currentFrame_ = 0;                   // aktualna klatka
-    uint64_t lastFrameTime_ = 0;                // czas ostatniej zmiany klatki
+    std::vector<std::vector<uint8_t>> frames_;
+    std::vector<int> delays_;
+    size_t currentFrame_ = 0;
+    uint64_t lastFrameTime_ = 0;
 };

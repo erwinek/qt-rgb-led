@@ -6,48 +6,64 @@
 #include <chrono>
 #include <algorithm> // std::min
 
-GifPlayer::GifPlayer(const std::string &path) : path_(path) {}
+GifPlayer::GifPlayer() {
+}
 
-bool GifPlayer::load() {
-    gd_GIF *gif = gd_open_gif(path_.c_str());
-    if (!gif) {
-        std::cerr << "Nie mogę otworzyć GIF: " << path_ << std::endl;
+
+bool GifPlayer::load(const std::string& new_filename) {
+    if (!new_filename.empty()) {
+        path_ = new_filename;
+    }
+    
+    if (path_.empty()) {
         return false;
     }
 
-    width_ = gif->width;
-    height_ = gif->height;
-
-    frames_.clear();
-    delays_.clear();
-
-    uint8_t *frame = (uint8_t*)malloc(gif->width * gif->height * 3);
-    if (!frame) {
-        gd_close_gif(gif);
-        return false;
-    }
-
-    do {
-        if (gd_get_frame(gif)) {
-            memset(frame, 0, gif->width * gif->height * 3); // czarne tło
-            gd_render_frame(gif, frame);
-
-            // zapisz RGB
-            std::vector<uint8_t> rgb(frame, frame + (gif->width * gif->height * 3));
-            frames_.push_back(rgb);
-
-            // delay w ms (gce.delay = setki ms)
-            delays_.push_back(gif->gce.delay * 10);
+    try {
+        gd_GIF *gif = gd_open_gif(path_.c_str());
+        if (!gif) {
+            std::cerr << "Nie mogę otworzyć GIF: " << path_ << std::endl;
+            return false;
         }
-    } while (gd_get_frame(gif) > 0);
 
-    free(frame);
-    gd_close_gif(gif);
+        width_ = gif->width;
+        height_ = gif->height;
 
-    currentFrame_ = 0;
-    lastFrameTime_ = 0;
+        frames_.clear();
+        delays_.clear();
 
-    return !frames_.empty();
+        uint8_t *frame = (uint8_t*)malloc(gif->width * gif->height * 3);
+        if (!frame) {
+            gd_close_gif(gif);
+            return false;
+        }
+
+        do {
+            if (gd_get_frame(gif)) {
+                memset(frame, 0, gif->width * gif->height * 3); // czarne tło
+                gd_render_frame(gif, frame);
+
+                // zapisz RGB
+                std::vector<uint8_t> rgb(frame, frame + (gif->width * gif->height * 3));
+                frames_.push_back(rgb);
+
+                // delay w ms (gce.delay = setki ms)
+                delays_.push_back(gif->gce.delay * 10);
+            }
+        } while (gd_get_frame(gif) > 0);
+
+        free(frame);
+        gd_close_gif(gif);
+
+        currentFrame_ = 0;
+        lastFrameTime_ = 0;
+
+        return !frames_.empty();
+    }
+    catch(std::exception& e) {
+        std::cerr << "Error loading GIF: " << e.what() << std::endl;
+        return false;
+    }
 }
 
 void GifPlayer::render(rgb_matrix::FrameCanvas *canvas) {
