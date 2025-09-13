@@ -5,6 +5,8 @@
 #include <string>
 #include "SerialReader.h"
 #include "GifPlayer.h"
+#include <iostream>
+#include <stdexcept>
 
 using namespace rgb_matrix;
 
@@ -99,42 +101,70 @@ int main(int argc, char *argv[]) {
 	static int i = 0;
 
 	SerialReader serial("/dev/ttyUSB0", B1000000);
-	serial.setCommandHandler([&](const std::string& cmd) {
+
+
+
+serial.setCommandHandler([&](const std::string& cmd) {
+    auto safe_stoi = [&](const std::string& s, int &out) -> bool {
+        try {
+            out = std::stoi(s);
+            return true;
+        } catch (const std::invalid_argument&) {
+            std::cerr << "Błąd: nieprawidłowa liczba: '" << s << "' dla komendy: " << cmd << "\n";
+        } catch (const std::out_of_range&) {
+            std::cerr << "Błąd: liczba poza zakresem: '" << s << "' dla komendy: " << cmd << "\n";
+        }
+        return false;
+    };
+
     if (cmd.rfind("SCORE", 0) == 0) {
-        int val = std::stoi(cmd.substr(6));
-        display.setScore(val);
+        int val;
+        std::string arg = cmd.substr(6);
+        if (safe_stoi(arg, val)) display.setScore(val);
+
     } else if (cmd.rfind("HISCORE", 0) == 0) {
-        int val = std::stoi(cmd.substr(8));
-        display.setHighScore(val);
+        int val;
+        std::string arg = cmd.substr(8);
+        if (safe_stoi(arg, val)) display.setHighScore(val);
+
     } else if (cmd.rfind("CREDITS", 0) == 0) {
-        int val = std::stoi(cmd.substr(8));
-        display.setCredits(val);
+        int val;
+        std::string arg = cmd.substr(8);
+        if (safe_stoi(arg, val)) display.setCredits(val);
+
     } else if (cmd.rfind("TEXT", 0) == 0) {
-        display.setScrollText(cmd.substr(5));
+        std::string arg = cmd.substr(5);
+        if (!arg.empty()) {
+            display.setScrollText(arg);
+        } else {
+            std::cerr << "Błąd: brak tekstu po TEXT\n";
+        }
+
     } else if (cmd.rfind("STOP_GIF", 0) == 0) {
         play_gif = false;
+
     } else if (cmd.rfind("PLAY_GIF", 0) == 0) {
-        std::string path = "anime/" + cmd.substr(9) + ".gif";
-        printf("\n path: %s\n", path.c_str());
-
-        //path = "anime/cube-14564_256.gif";
-        //gif_player = std::make_unique<GifPlayer>(path);
-	//gif_player->load();
-        //play_gif = true;
-
-	gif_player = std::make_unique<GifPlayer>(path);
-	if (!gif_player->load()) {
-    		fprintf(stderr, "Nie udało się załadować GIF: %s\n", path.c_str());
-    		gif_player.reset();
-    		play_gif = false;
-	}
-	else {
-//		play_gif = true;
-	}
-
-
+        std::string name = cmd.substr(9);
+        if (!name.empty()) {
+            std::string path = "anime/" + name + ".gif";
+            std::cout << "Ładowanie GIF: " << path << std::endl;
+            gif_player = std::make_unique<GifPlayer>(path);
+            if (gif_player->load()) {
+                play_gif = true;
+            } else {
+                std::cerr << "Błąd: nie udało się załadować GIF: " << path << "\n";
+                play_gif = false;
+            }
+        } else {
+            std::cerr << "Błąd: brak nazwy pliku w PLAY_GIF\n";
+        }
     }
 });
+
+
+
+
+
 serial.start();
 
     while (!interrupt_received) {
