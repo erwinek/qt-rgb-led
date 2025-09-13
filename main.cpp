@@ -22,10 +22,9 @@ static void InterruptHandler(int signo) {
 class LedTextDisplay {
 public:
     LedTextDisplay()
-        : score_(888), high_score_(600), credits_(0), scroll_text_("Boxer ProGames") {
-            if (!small_font.LoadFont("./fonts/7x13.bdf")) {
-            printf("Nie można wczytać small_font\n");
-            }
+        : score_(888), high_score_(600), credits_(0), scroll_text_(""), m_Text1("Press Start"), m_Text2("or use Hammer") {
+            if (!small_font.LoadFont("./fonts/7x13.bdf")) printf("Nie można wczytać small_font\n");
+	    if (!medium_font.LoadFont("./fonts/9x18B.bdf")) printf("Nie można wczytać medium_font\n");
         }
 
     void setScore(int score) { 
@@ -55,12 +54,17 @@ public:
 	if(credits_==55) DrawText(canvas, small_font, 192/3, 115, color3, "FreePlay");
         else DrawText(canvas, font, 192/3, 128, color3, std::to_string(credits_).c_str());
 
-        // Przewijający się tekst
-        static int scroll_pos = canvas->width();
-        int text_width = font.CharacterWidth('0') * scroll_text_.size(); // przybliżona szerokość
-        scroll_pos -= 1;
-        if (scroll_pos < -text_width) scroll_pos = canvas->width();
-        DrawText(canvas, font, scroll_pos, 170, color4, scroll_text_.c_str());
+	//Przewijajacy sie text
+	if(scroll_text_.length() > 0) {
+            static int scroll_pos = canvas->width();
+            int text_width = font.CharacterWidth('0') * scroll_text_.size(); // przybliżona szerokość
+            scroll_pos -= 1;
+            if (scroll_pos < -text_width) scroll_pos = canvas->width();
+            DrawText(canvas, font, scroll_pos, 175, color4, scroll_text_.c_str());
+	}
+	else if(m_Text1.length() > 0) {
+		DrawText(canvas, medium_font, 0, 175, color4, "Press Start Button");
+	}
 
     }
 
@@ -69,7 +73,10 @@ private:
     int high_score_;
     int credits_;
     std::string scroll_text_;
+    std::string m_Text1;
+    std::string m_Text2;
     Font small_font;
+    Font medium_font;
 };
 
 int main(int argc, char *argv[]) {
@@ -150,7 +157,7 @@ serial.setCommandHandler([&](const std::string& cmd) {
             std::cout << "Ładowanie GIF: " << path << std::endl;
             gif_player = std::make_unique<GifPlayer>(path);
             if (gif_player->load()) {
-                play_gif = true;
+//                play_gif = true;
             } else {
                 std::cerr << "Błąd: nie udało się załadować GIF: " << path << "\n";
                 play_gif = false;
