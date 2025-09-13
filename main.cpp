@@ -41,6 +41,7 @@ public:
         Color color2(0, 255, 0);    // zielony
         Color color3(0, 0, 255);    // niebieski
         Color color4(255, 255, 0);  // żółty
+        Color colorBlack(0, 0, 0);  // czarny
 
         // Czyszczenie całego ekranu
         canvas->Clear();
@@ -62,11 +63,23 @@ public:
             if (scroll_pos < -text_width) scroll_pos = canvas->width();
             DrawText(canvas, font, scroll_pos, 175, color4, scroll_text_.c_str());
 	}
-	else if(m_Text1.length() > 0) {
-		DrawText(canvas, medium_font, 0, 175, color4, "Press Start Button");
-	}
-
+    else {
+        if(m_Text1.length() > 0) {
+            const char* text = m_Text1.c_str();
+            int x = 0;  // centrowanie względem szerokości ekranu
+            int text_width = DrawText(canvas, medium_font, x, 160, colorBlack, text);
+            x = (192 - text_width) / 2;  // centrowanie względem szerokości ekranu
+            DrawText(canvas, medium_font, x, 170, color4, text);
+	    }      
+        if(m_Text2.length() > 0) {
+            const char* text = m_Text2.c_str();
+            int x = 0;  // centrowanie względem szerokości ekranu
+            int text_width = DrawText(canvas, medium_font, x, 185, colorBlack, text);
+            x = (192 - text_width) / 2;  // centrowanie względem szerokości ekranu
+            DrawText(canvas, medium_font, x, 185, color4, text);
+	    }  
     }
+}
 
 private:
     int score_;
