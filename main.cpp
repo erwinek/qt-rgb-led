@@ -7,6 +7,7 @@
 #include "GifPlayer.h"
 #include <iostream>
 #include <stdexcept>
+#include <chrono>
 
 using namespace rgb_matrix;
 
@@ -64,20 +65,30 @@ public:
             DrawText(canvas, font, scroll_pos, 175, color4, scroll_text_.c_str());
 	}
     else {
-        if(m_Text1.length() > 0) {
-            const char* text = m_Text1.c_str();
-            int x = 0;  // centrowanie względem szerokości ekranu
-            int text_width = DrawText(canvas, medium_font, x, 160, colorBlack, text);
-            x = (192 - text_width) / 2;  // centrowanie względem szerokości ekranu
-            DrawText(canvas, medium_font, x, 170, color4, text);
-	    }      
-        if(m_Text2.length() > 0) {
-            const char* text = m_Text2.c_str();
-            int x = 0;  // centrowanie względem szerokości ekranu
-            int text_width = DrawText(canvas, medium_font, x, 185, colorBlack, text);
-            x = (192 - text_width) / 2;  // centrowanie względem szerokości ekranu
-            DrawText(canvas, medium_font, x, 185, color4, text);
-	    }  
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_blink).count();
+        
+        if (elapsed >= BLINK_INTERVAL) {
+            text_visible = !text_visible;
+            last_blink = now;
+        }
+        
+        if (text_visible) {
+            if(m_Text1.length() > 0) {
+                const char* text = m_Text1.c_str();
+                int x = 0;
+                int text_width = DrawText(canvas, medium_font, x, 160, colorBlack, text);
+                x = (192 - text_width) / 2;
+                DrawText(canvas, medium_font, x, 170, color4, text);
+            }      
+            if(m_Text2.length() > 0) {
+                const char* text = m_Text2.c_str();
+                int x = 0;
+                int text_width = DrawText(canvas, medium_font, x, 185, colorBlack, text);
+                x = (192 - text_width) / 2;
+                DrawText(canvas, medium_font, x, 185, color4, text);
+            }  
+        }
     }
 }
 
@@ -90,6 +101,9 @@ private:
     std::string m_Text2;
     Font small_font;
     Font medium_font;
+    bool text_visible = true;
+    std::chrono::steady_clock::time_point last_blink = std::chrono::steady_clock::now();
+    const int BLINK_INTERVAL = 300; // ms
 };
 
 int main(int argc, char *argv[]) {
