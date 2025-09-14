@@ -52,9 +52,9 @@ public:
         DrawText(canvas, font, 192/3, 40, color1, std::to_string(score_).c_str());
         DrawText(canvas, small_font, 10, 72, color2, "RECORD:");
         DrawText(canvas, font, 192/3, 84, color2, std::to_string(high_score_).c_str());
-        DrawText(canvas, small_font, 10, 115, color3, "CREDIT:");
+        DrawText(canvas, small_font, 10, 115, color3, "Credit:");
 	if(credits_==55) DrawText(canvas, small_font, 192/3, 115, color3, "FreePlay");
-        else DrawText(canvas, font, 192/3, 128, color3, std::to_string(credits_).c_str());
+        else DrawText(canvas, medium_font, 192/3 + 33, 115, color3, std::to_string(credits_).c_str());
 
 	//Przewijajacy sie text
 	if(scroll_text_.length() > 0) {
@@ -79,14 +79,14 @@ public:
                 int x = 0;
                 int text_width = DrawText(canvas, medium_font, x, 160, colorBlack, text);
                 x = (192 - text_width) / 2;
-                DrawText(canvas, medium_font, x, 170, color4, text);
+                DrawText(canvas, medium_font, x, 160, color4, text);
             }      
             if(m_Text2.length() > 0) {
                 const char* text = m_Text2.c_str();
                 int x = 0;
                 int text_width = DrawText(canvas, medium_font, x, 185, colorBlack, text);
                 x = (192 - text_width) / 2;
-                DrawText(canvas, medium_font, x, 185, color4, text);
+                DrawText(canvas, medium_font, x, 175, color4, text);
             }  
         }
     }
