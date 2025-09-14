@@ -43,7 +43,9 @@ public:
         Color color3(0, 0, 255);    // niebieski
         Color color4(255, 255, 0);  // żółty
         Color colorBlack(0, 0, 0);  // czarny
+	Color orange(255,255,0);    //orange
 
+  if(play_gif==false) {
         // Czyszczenie całego ekranu
         canvas->Clear();
 
@@ -90,6 +92,12 @@ public:
             }  
         }
     }
+  }
+  else {
+    DrawText(canvas, medium_font, 10, 180, color4, "*$* Insert Coin *$*");
+    DrawText(canvas, medium_font, 10, 1, orange, "ProGames");
+    DrawText(canvas, small_font, 30, 30, orange, "Monster 3in1");
+  }
 }
 
     void setText1(const std::string& text) { m_Text1 = text; }
@@ -223,6 +231,7 @@ serial.start();
 
         if (play_gif && gif_player) {
             gif_player->render(canvas);
+            display.render(canvas, font);
         } else {
             display.render(canvas, font);
         }
