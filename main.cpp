@@ -43,7 +43,7 @@ public:
         Color color3(0, 0, 255);    // niebieski
         Color color4(255, 255, 0);  // żółty
         Color colorBlack(0, 0, 0);  // czarny
-	Color orange(255,255,0);    //orange
+	Color orange(0xFE,0x7F,0);    //orange
 
   if(play_gif==false) {
         // Czyszczenie całego ekranu
@@ -95,7 +95,7 @@ public:
   }
   else {
     DrawText(canvas, medium_font, 10, 180, color4, "*€* Insert Coin *€*");
-    DrawText(canvas, medium_font, 25, 12, orange, "PRO-GAMES POLAND");
+    DrawText(canvas, medium_font, 25, 12, color4, "PRO-GAMES POLAND");
     DrawText(canvas, small_font, 40, 25, orange, "* Monster 3in1 *");
   }
 }
