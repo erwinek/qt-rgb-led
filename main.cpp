@@ -95,8 +95,8 @@ public:
   }
   else {
     DrawText(canvas, medium_font, 10, 180, color4, "*$* Insert Coin *$*");
-    DrawText(canvas, medium_font, 10, 1, orange, "ProGames");
-    DrawText(canvas, small_font, 30, 30, orange, "Monster 3in1");
+    DrawText(canvas, medium_font, 25, 12, orange, "PRO-GAMES POLAND");
+    DrawText(canvas, small_font, 40, 25, orange, "* Monster 3in1 *");
   }
 }
 
