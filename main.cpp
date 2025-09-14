@@ -50,10 +50,10 @@ public:
         canvas->Clear();
 
         // Statyczne linie
-        DrawText(canvas, small_font, 10, 26, color1, "SCORE:");
-        DrawText(canvas, font, 192/3, 40, color1, std::to_string(score_).c_str());
-        DrawText(canvas, small_font, 10, 72, color2, "RECORD:");
-        DrawText(canvas, font, 192/3, 84, color2, std::to_string(high_score_).c_str());
+        DrawText(canvas, small_font, 10, 26, color2, "SCORE:");
+        DrawText(canvas, font, 192/3, 40, color2, std::to_string(score_).c_str());
+        DrawText(canvas, small_font, 10, 72, color1, "RECORD:");
+        DrawText(canvas, font, 192/3, 84, color1, std::to_string(high_score_).c_str());
         DrawText(canvas, small_font, 10, 115, color3, "Credit:");
 	if(credits_==55) DrawText(canvas, small_font, 192/3, 115, color3, "FreePlay");
         else DrawText(canvas, medium_font, 192/3 + 33, 115, color3, std::to_string(credits_).c_str());
