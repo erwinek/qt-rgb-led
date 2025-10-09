@@ -10,3 +10,6 @@ sudo systemctl disable qt-rgb-led.service
 sudo bash -c "ulimit -c unlimited && /home/erwinek/qt-rgb-led/build/qt-rgb-led -platform offscreen"
 
 sudo dd if=/dev/mmcblk0 of=/dev/sda bs=4M status=progress
+
+
+#RW: sudo mount -o remount,rw /dev/mmcblk0p2 /
