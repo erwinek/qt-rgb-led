@@ -1,0 +1,76 @@
+sudo apt install git
+git clone https://github.com/erwinek/matrix.git
+
+sudo nano /boot/firmware/cmdline.txt dodaj isolcpus=3
+
+
+Open a terminal.
+Navigate to the directory: cd /etc/modprobe.d/.
+Open the raspi-blacklist.conf file: sudo nano raspi-blacklist.conf.
+Add the line blacklist snd_bcm2835 at the end of the file.
+Save and exit.
+Reboot the system: sudo reboot. 
+
+
+sudo apt-get install libgraphicsmagick++1-dev
+
+git clone https://github.com/erwinek/matrix.git
+
+	SER2NET 
+sudo apt install ser2net
+nano /etc/ser2net.yaml
+
+%YAML 1.1
+---
+
+define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
+
+connection: &con01
+    accepter: tcp,0.0.0.0,3333
+    enable: on
+    options:
+      banner: *banner
+      kickolduser: true
+      telnet-brk-on-sync: true
+      max-connections: 2               # do 2 klientów równocześnie
+    connector: serialdev,/dev/ttyUSB0,1000000n81,local
+	
+sudo systemctl restart ser2net
+sudo systemctl status ser2net
+
+SERVICE
+sudo nano /etc/systemd/system/liv.service
+
+
+[Unit]
+Description=LED Image Viewer
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/erwinek/matrix/led-image-viewer
+WorkingDirectory=/home/erwinek/matrix
+
+# Uruchamiaj jako root (pełne prawa do GPIO, SPI, I2C, itp.)
+User=root
+Group=root
+
+# Opcjonalne: opóźnienie startu, żeby urządzenia się zainicjowały
+ExecStartPre=/bin/sleep 3
+
+# Automatyczny restart po błędzie
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now liv.service
+sudo systemctl status led-image-viewer.service
+
+
+sudo nano /usr/lib/systemd/system/ser2net.service
+
+
+sockets.target
